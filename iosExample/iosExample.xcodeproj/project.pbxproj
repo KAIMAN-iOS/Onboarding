@@ -14,6 +14,7 @@
 		C65D413C253988E7000B081B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C65D413B253988E7000B081B /* Assets.xcassets */; };
 		C65D413F253988E7000B081B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C65D413D253988E7000B081B /* LaunchScreen.storyboard */; };
 		C65D414B2539895F000B081B /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = C65D414A2539895F000B081B /* Onboarding */; };
+		C65D414F25398A61000B081B /* Onboarding in Frameworks */ = {isa = PBXBuildFile; productRef = C65D414E25398A61000B081B /* Onboarding */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C65D414B2539895F000B081B /* Onboarding in Frameworks */,
+				C65D414F25398A61000B081B /* Onboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +99,7 @@
 			name = iosExample;
 			packageProductDependencies = (
 				C65D414A2539895F000B081B /* Onboarding */,
+				C65D414E25398A61000B081B /* Onboarding */,
 			);
 			productName = iosExample;
 			productReference = C65D412F253988E5000B081B /* iosExample.app */;
@@ -125,6 +128,9 @@
 				Base,
 			);
 			mainGroup = C65D4126253988E5000B081B;
+			packageReferences = (
+				C65D414D25398A61000B081B /* XCRemoteSwiftPackageReference "Onboarding" */,
+			);
 			productRefGroup = C65D4130253988E5000B081B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -357,9 +363,25 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		C65D414D25398A61000B081B /* XCRemoteSwiftPackageReference "Onboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jerometonnelier/Onboarding.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		C65D414A2539895F000B081B /* Onboarding */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Onboarding;
+		};
+		C65D414E25398A61000B081B /* Onboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C65D414D25398A61000B081B /* XCRemoteSwiftPackageReference "Onboarding" */;
 			productName = Onboarding;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gPq-GT-r8O">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,36 +26,19 @@
                                     <action selector="skip" destination="gPq-GT-r8O" eventType="touchUpInside" id="uvC-pU-O1K"/>
                                 </connections>
                             </button>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-vW-R4c">
+                            <pageControl opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="g4b-vW-R4c">
                                 <rect key="frame" x="145.5" y="821" width="123" height="28"/>
-                                <connections>
-                                    <action selector="pageControlSelected" destination="gPq-GT-r8O" eventType="valueChanged" id="YIk-eK-CAy"/>
-                                </connections>
                             </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTf-we-11S">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
-                                <subviews>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2B-aG-92X">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
-                                        <connections>
-                                            <segue destination="ybJ-0n-7DK" kind="embed" id="Hf1-S5-HOA"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.29803921570000003" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="D2B-aG-92X" firstAttribute="top" secondItem="OTf-we-11S" secondAttribute="top" id="J0J-DJ-lzT"/>
-                                    <constraint firstAttribute="trailing" secondItem="D2B-aG-92X" secondAttribute="trailing" id="Vzy-Ak-6yO"/>
-                                    <constraint firstItem="D2B-aG-92X" firstAttribute="leading" secondItem="OTf-we-11S" secondAttribute="leading" id="eqU-EH-hJ0"/>
-                                    <constraint firstAttribute="bottom" secondItem="D2B-aG-92X" secondAttribute="bottom" id="p5j-kH-02f"/>
-                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDq-bM-hGu">
                                 <rect key="frame" x="325" y="816" width="69" height="38"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.68235294120000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="15" minY="10" maxX="15" maxY="10"/>
                                 <state key="normal" title="NEXT">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" name="textColor"/>
                                 </state>
                                 <connections>
                                     <action selector="next" destination="gPq-GT-r8O" eventType="touchUpInside" id="EvB-Eo-mjs"/>
@@ -90,24 +73,10 @@
             </objects>
             <point key="canvasLocation" x="-638" y="80"/>
         </scene>
-        <!--Page View Controller-->
-        <scene sceneID="xq9-el-Kgq">
-            <objects>
-                <viewController id="ybJ-0n-7DK" customClass="UIPageViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XkT-9f-sHk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1YE-QV-v9E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="103" y="80"/>
-        </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="textColor">
+            <color red="0.13300000131130219" green="0.16899999976158142" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

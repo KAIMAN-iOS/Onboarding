@@ -13,128 +13,189 @@ import UIViewExtension
 public struct OnboardingData {
     let title: String
     let message: String
-    let image: UIImage
+    let image: UIImage?
     let textColor: UIColor
-    let font: Fontable
+    let titleFont: Fontable?
+    let messageFont: Fontable?
+    
+    public init(title: String,
+                message: String,
+                image: UIImage?,
+                textColor: UIColor,
+                titleFont: Fontable? = nil,
+                messageFont: Fontable? = nil) {
+        self.title = title
+        self.message = message
+        self.image = image
+        self.textColor = textColor
+        self.titleFont = titleFont
+        self.messageFont = messageFont
+    }
 }
 
-final class OnboardingController: UIViewController {
-    static func create() -> OnboardingController {
-        return OnboardingController.loadFromStoryboard(storyboard: "Onboarding")
-    }
-    
-    var pageController: UIPageViewController!
-    @IBOutlet public weak var pageContainer: UIView!  {
-        didSet {
-            pageContainer.round(corners: [.bottomLeft, .bottomRight], radius: 20.0)
-            pageContainer.clipsToBounds = true
-        }
-    }
+public protocol OnboardingDelegate: class {
+    func titleForNextButton(at index: Int) -> String
+}
 
+final public class OnboardingController: UIViewController {
+    public static func create(with delegate: OnboardingDelegate? = nil) -> OnboardingController {
+        let ctrl: OnboardingController = UIStoryboard(name: "Onboarding", bundle: Bundle.module).instantiateInitialViewController() as! OnboardingController
+        ctrl.delegate = delegate
+        return ctrl
+    }
+    weak var delegate: OnboardingDelegate?
+    @IBOutlet public weak var pageContainer: UIView!
     @IBOutlet public weak var pageControl: UIPageControl!
     @IBOutlet public weak var nextButton: UIButton!  {
         didSet {
-            nextButton.layer.cornerRadius = nextButton.frame.midY
+            nextButton.layer.cornerRadius = nextButton.bounds.midY
         }
     }
 
     @IBOutlet public weak var skipButton: UIButton!
-    var doneCompletion: (() -> Void)? = nil
+    public var doneCompletion: (() -> Void)? = nil
     
     private var onboardingData: [OnboardingData] = []
-    private var currentIndex: Int = 0
+    private var onboardingController: [UIViewController] = []
+    private var currentIndex: Int = 0  {
+        didSet {
+            pageControl?.currentPage = currentIndex
+        }
+    }
 
-    override func viewDidLoad() {
+    lazy var pageController = UIPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        guard let pager = children.compactMap({ $0 as? UIPageViewController }).first else {
-            fatalError("No page controller found")
-        }
-        pageController = pager
-        pageController.dataSource = self
         
-        guard let first = onboardingData.first else {
-            return
+        pageContainer.addSubview(pageController.view)
+        pageController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
-        pageController.setViewControllers([controller(for: first)],
-                                          direction: .forward,
-                                          animated: false,
-                                          completion: nil)
-        addGesture(for: .left)
-        addGesture(for: .right)
+        pageController.dataSource = self
+        pageController.delegate = self
     }
     
-    func addGesture(for direction: UISwipeGestureRecognizer.Direction) {
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipe(_:)))
-        gesture.direction = direction
-        view.addGestureRecognizer(gesture)
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        pageContainer.round(corners: [.bottomLeft, .bottomRight], radius: 20.0)
+        pageContainer.clipsToBounds = true
     }
     
     public func load(_ data: [OnboardingData]) {
+        onboardingData.removeAll()
+        onboardingController.removeAll()
         onboardingData = data
-        pageControl.numberOfPages = data.count
-        pageControl.currentPage = 0
+        onboardingController = onboardingData.compactMap({ controller(for: $0) })
+        // for load pruposes
+        guard pageControl != nil else { return }
+        loadPages()
     }
     
-    @objc func swipe(_ gesture: UISwipeGestureRecognizer) {
-        guard gesture.state == .ended else {
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadPages()
+    }
+    
+    private func loadPages() {
+        pageControl.numberOfPages = onboardingData.count
+        pageControl.currentPage = 0
+        
+        guard let first = onboardingController.first else {
             return
         }
-        switch gesture.direction {
-        case .left: showNextController()
-        case .right: showPreviousController()
-        default: ()
-        }
+        pageController.setViewControllers([first],
+                                          direction: .forward,
+                                          animated: false,
+                                          completion: nil)
     }
     
     func controller(for data: OnboardingData) -> OnboardedController {
-        let ctrl: OnboardedController = OnboardedController.loadFromNib()
+        let ctrl: OnboardedController = OnboardedController.init(nibName: "OnboardedController", bundle: Bundle.module)
         ctrl.configure(data)
         return ctrl
     }
     
     @IBAction func pageControlSelected() {
-        if pageControl.currentPage < currentIndex {
-            showPreviousController()
-        } else {
-            showNextController()
-        }
+        show(controller: controller(at: pageControl.currentPage < currentIndex ? currentIndex - 1 : currentIndex + 1),
+             direction: pageControl.currentPage < currentIndex ?.reverse : .forward)
     }
     
     @IBAction func next() {
-        showNextController()
+        guard currentIndex < onboardingData.count - 1 else {
+            doneCompletion?()
+            return
+        }
+        show(controller: controller(at: currentIndex + 1), direction: .forward)
+        currentIndex += 1
+        updateNextButton()
     }
     
     @IBAction func skip() {
         doneCompletion?()
     }
     
-    @discardableResult
-    func showNextController() -> UIViewController? {
-        guard currentIndex > 0, currentIndex + 1 < onboardingData.count else { return nil }
-        currentIndex += 1
-        pageControl.currentPage += 1
-        return controller(for: onboardingData[currentIndex])
+    private func show(controller: UIViewController?, direction: UIPageViewController.NavigationDirection) {
+        guard let controller = controller else { return }
+        pageController.setViewControllers([controller],
+                                          direction: direction,
+                                          animated: true,
+                                          completion: nil)
     }
     
     @discardableResult
-    func showPreviousController() -> UIViewController? {
-        guard currentIndex > 0, (currentIndex - 1) > 0 else { return nil }
-        currentIndex -= 1
-        pageControl.currentPage -= 1
-        return controller(for: onboardingData[currentIndex])
+    func controller(after controller: UIViewController) -> UIViewController? {
+        guard let index = onboardingController.firstIndex(where: { $0 === controller }) else { return nil }
+        print("-> \(currentIndex)")
+        return self.controller(at: index + 1)
+    }
+    
+    @discardableResult
+    func controller(before controller: UIViewController) -> UIViewController? {
+        guard let index = onboardingController.firstIndex(where: { $0 === controller }) else { return nil }
+        print("-> \(currentIndex)")
+        return self.controller(at: index - 1)
+    }
+    
+    private func controller(at index: Int) -> UIViewController? {
+        guard index >= 0, index < onboardingController.count else { return nil }
+        return onboardingController[index]
+    }
+    
+    func updateNextButton() {
+        var title = currentIndex == onboardingData.count - 1 ? "FINISH" : "NEXT"
+        if let delegateTitle = delegate?.titleForNextButton(at: currentIndex) {
+            title = delegateTitle
+        }
+        // no transition is there is no text change
+        guard title != nextButton.title(for: .normal) else { return }
+        
+        UIView.transition(with: self.nextButton, duration: 0.3,
+                          options: currentIndex == self.onboardingData.count - 1 ? .transitionFlipFromLeft : .transitionFlipFromRight) { [weak self] in
+            guard let self = self else { return }
+            self.nextButton.setTitle(title, for: .normal)
+            self.nextButton.backgroundColor = self.currentIndex == self.onboardingData.count - 1 ? #colorLiteral(red: 0.9877198339, green: 0.3950536847, blue: 0.3682359457, alpha: 1) : #colorLiteral(red: 0.996609509, green: 0.6680213809, blue: 0.006788168568, alpha: 1)
+        } completion: { _ in
+        }
     }
 }
 
 extension OnboardingController: UIPageViewControllerDelegate {
-    
+    public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard let controller = pageController.viewControllers?.first,
+              let index = onboardingController.firstIndex(where: { $0 === controller }) else {
+            return
+        }
+        currentIndex = index
+        updateNextButton()
+    }
 }
 
 extension OnboardingController: UIPageViewControllerDataSource{
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        showPreviousController()
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        controller(before: viewController)
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        showNextController()
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        controller(after: viewController)
     }
 }
