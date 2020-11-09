@@ -34,7 +34,7 @@ public struct OnboardingData {
 }
 
 public protocol OnboardingDelegate: class {
-    func titleForNextButton(at index: Int) -> String
+    func titleForNextButton(at index: Int) -> String?
 }
 
 final public class OnboardingController: UIViewController {
@@ -52,7 +52,12 @@ final public class OnboardingController: UIViewController {
         }
     }
 
-    @IBOutlet public weak var skipButton: UIButton!
+    @IBOutlet public weak var skipButton: UIButton!  {
+        didSet {
+            skipButton.setTitle("SKIP".bundleLocale(), for: .normal)
+        }
+    }
+
     public var doneCompletion: (() -> Void)? = nil
     
     private var onboardingData: [OnboardingData] = []
@@ -89,6 +94,7 @@ final public class OnboardingController: UIViewController {
         // for load pruposes
         guard pageControl != nil else { return }
         loadPages()
+        updateNextButton()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -162,7 +168,7 @@ final public class OnboardingController: UIViewController {
     }
     
     func updateNextButton() {
-        var title = currentIndex == onboardingData.count - 1 ? "FINISH" : "NEXT"
+        var title = currentIndex == onboardingData.count - 1 ? "LET'S GO".bundleLocale() : "NEXT".bundleLocale()
         if let delegateTitle = delegate?.titleForNextButton(at: currentIndex) {
             title = delegateTitle
         }
@@ -197,5 +203,11 @@ extension OnboardingController: UIPageViewControllerDataSource{
     
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         controller(after: viewController)
+    }
+}
+
+extension String {
+    func bundleLocale() -> String {
+        NSLocalizedString(self, bundle: .module, comment: self)
     }
 }
