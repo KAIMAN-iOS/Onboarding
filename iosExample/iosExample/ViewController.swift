@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showOnboard() {
-        let ctrl = OnboardingController.create()
+        let ctrl = OnboardingController.create(with: self)
         ctrl.load(data)
         ctrl.doneCompletion = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
@@ -49,6 +49,10 @@ class ViewController: UIViewController {
                        titleFont: FontType.bigTitle,
                        messageFont: FontType.default)
     }
-
 }
 
+extension ViewController: OnboardingDelegate {
+    func titleForNextButton(at index: Int) -> String? {
+        return index == 3 ? "C'est parti" : "Next"
+    }
+}

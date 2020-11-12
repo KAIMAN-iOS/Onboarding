@@ -31,7 +31,7 @@
                             </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTf-we-11S">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="786"/>
-                                <color key="backgroundColor" red="0.97254901959999995" green="0.29803921570000003" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.7843137255" green="0.31372549020000001" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDq-bM-hGu">
                                 <rect key="frame" x="325" y="816" width="69" height="38"/>
@@ -46,12 +46,12 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Qo-He-GYZ"/>
-                        <color key="backgroundColor" red="0.1333333333" green="0.16862745100000001" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.1176470588" green="0.12941176469999999" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="rDq-bM-hGu" firstAttribute="centerY" secondItem="g4b-vW-R4c" secondAttribute="centerY" id="5Re-f3-yyC"/>
                             <constraint firstItem="OTf-we-11S" firstAttribute="trailing" secondItem="6Qo-He-GYZ" secondAttribute="trailing" id="6HY-Bf-PIG"/>
                             <constraint firstItem="OTf-we-11S" firstAttribute="top" secondItem="5su-Og-naN" secondAttribute="top" id="E8f-Ll-kSy"/>
-                            <constraint firstItem="rDq-bM-hGu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g4b-vW-R4c" secondAttribute="trailing" id="Fx1-iF-abt"/>
+                            <constraint firstItem="rDq-bM-hGu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="g4b-vW-R4c" secondAttribute="trailing" constant="-10" id="Fx1-iF-abt"/>
                             <constraint firstItem="6Qo-He-GYZ" firstAttribute="bottom" secondItem="g4b-vW-R4c" secondAttribute="bottom" constant="13" id="Jgz-p2-Lh6"/>
                             <constraint firstItem="OTf-we-11S" firstAttribute="leading" secondItem="6Qo-He-GYZ" secondAttribute="leading" id="VFN-k3-xmJ"/>
                             <constraint firstItem="g4b-vW-R4c" firstAttribute="centerX" secondItem="5su-Og-naN" secondAttribute="centerX" id="Zl8-VT-DBq"/>
@@ -76,7 +76,7 @@
     </scenes>
     <resources>
         <namedColor name="textColor">
-            <color red="0.13300000131130219" green="0.16899999976158142" blue="0.27099999785423279" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.16099999845027924" green="0.17599999904632568" blue="0.2199999988079071" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

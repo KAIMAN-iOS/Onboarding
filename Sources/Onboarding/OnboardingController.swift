@@ -94,7 +94,6 @@ final public class OnboardingController: UIViewController {
         // for load pruposes
         guard pageControl != nil else { return }
         loadPages()
-        updateNextButton()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -113,6 +112,7 @@ final public class OnboardingController: UIViewController {
                                           direction: .forward,
                                           animated: false,
                                           completion: nil)
+        updateNextButton()
     }
     
     func controller(for data: OnboardingData) -> OnboardedController {
