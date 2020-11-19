@@ -9,6 +9,7 @@ import UIKit
 import FontExtension
 import UIViewControllerExtension
 import UIViewExtension
+import ATAConfiguration
 
 public struct OnboardingData {
     let title: String
@@ -38,9 +39,11 @@ public protocol OnboardingDelegate: class {
 }
 
 final public class OnboardingController: UIViewController {
-    public static func create(with delegate: OnboardingDelegate? = nil) -> OnboardingController {
+    static var configuration: ATAConfiguration!
+    public static func create(with delegate: OnboardingDelegate? = nil, configuration: ATAConfiguration) -> OnboardingController {
         let ctrl: OnboardingController = UIStoryboard(name: "Onboarding", bundle: Bundle.module).instantiateInitialViewController() as! OnboardingController
         ctrl.delegate = delegate
+        OnboardingController.configuration = configuration
         return ctrl
     }
     weak var delegate: OnboardingDelegate?
@@ -71,6 +74,9 @@ final public class OnboardingController: UIViewController {
     lazy var pageController = UIPageViewController.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     public override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = OnboardingController.configuration.palette.mainTexts
+        pageContainer.backgroundColor = OnboardingController.configuration.palette.primary
         
         pageContainer.addSubview(pageController.view)
         pageController.view.snp.makeConstraints { make in
