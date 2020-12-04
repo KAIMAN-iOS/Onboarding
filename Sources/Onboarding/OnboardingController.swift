@@ -16,15 +16,15 @@ public struct OnboardingData {
     let message: String
     let image: UIImage?
     let textColor: UIColor
-    let titleFont: Fontable?
-    let messageFont: Fontable?
+    let titleFont: UIFont.TextStyle?
+    let messageFont: UIFont.TextStyle?
     
     public init(title: String,
                 message: String,
                 image: UIImage?,
                 textColor: UIColor,
-                titleFont: Fontable? = nil,
-                messageFont: Fontable? = nil) {
+                titleFont: UIFont.TextStyle? = nil,
+                messageFont: UIFont.TextStyle? = nil) {
         self.title = title
         self.message = message
         self.image = image

@@ -8,17 +8,7 @@
 import UIKit
 import FontExtension
 import LabelExtension
-
-private enum DefaultFont: Fontable {
-    case title, message
-    
-    var font: UIFont {
-        switch self {
-        case .title: return Font.style(.title1)
-        case .message: return Font.style(.body)
-        }
-    }
-}
+import Ampersand
 
 class OnboardedController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
@@ -32,8 +22,8 @@ class OnboardedController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleLabel.set(text: data.title, for: data.titleFont ?? DefaultFont.title, textColor: data.textColor)
-        messageLabel.set(text: data.message, for: data.messageFont ?? DefaultFont.message, textColor: data.textColor)
+        titleLabel.set(text: data.title, for: data.titleFont ?? .title1, textColor: data.textColor)
+        messageLabel.set(text: data.message, for: data.messageFont ?? .body, textColor: data.textColor)
         image.image = data.image
     }
 }

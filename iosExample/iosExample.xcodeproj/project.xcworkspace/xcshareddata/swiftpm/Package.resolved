@@ -2,12 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "Ampersand",
+        "repositoryURL": "https://github.com/darjeelingsteve/Ampersand",
+        "state": {
+          "branch": null,
+          "revision": "9498afe66ef14428c80647a4b1046c9aab97655a",
+          "version": "1.1.0"
+        }
+      },
+      {
+        "package": "ATAConfiguration",
+        "repositoryURL": "https://github.com/jerometonnelier/ATAConfiguration",
+        "state": {
+          "branch": null,
+          "revision": "8ec9be62f1f5783ce0acb71ff1cb885ca8265df2",
+          "version": "1.0.3"
+        }
+      },
+      {
         "package": "KExtensions",
         "repositoryURL": "https://github.com/jerometonnelier/KExtensions",
         "state": {
           "branch": null,
-          "revision": "dc1c7ab1be8bf014a8f1a187a0e3253659b2fe06",
-          "version": "1.0.12"
+          "revision": "8e29ed4a1b0ee56f1bd7f858acb1b88bd7d5c810",
+          "version": "1.0.20"
         }
       },
       {
@@ -24,8 +42,8 @@
         "repositoryURL": "https://github.com/kean/Nuke",
         "state": {
           "branch": null,
-          "revision": "a2a56211cd80614e1ac90bf2e76c5329f4f6b3d0",
-          "version": "9.1.2"
+          "revision": "ef122e4512e84020dca9d8f598408fdb38658946",
+          "version": "9.2.0"
         }
       },
       {
