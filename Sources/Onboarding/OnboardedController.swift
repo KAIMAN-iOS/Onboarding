@@ -64,7 +64,7 @@ class OnboardedController: UIViewController {
         if titleLabel.superview == nil {
             initializeVisualEffect()
         }
-        titleLabel.set(text: data.title, for: data.titleFont ?? .title1, textColor: data.textColor)
+        titleLabel.set(text: data.title, for: data.titleFont ?? .title1, traits: [.traitBold], textColor: data.textColor)
         messageLabel.set(text: data.message, for: data.messageFont ?? .body, textColor: data.textColor)
         image.image = data.image
     }

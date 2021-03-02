@@ -60,9 +60,10 @@ final public class OnboardingController: UIViewController {
             skipButton.setTitle("SKIP".bundleLocale(), for: .normal)
         }
     }
+    
+    public override var prefersStatusBarHidden: Bool { true }
 
     public var doneCompletion: (() -> Void)? = nil
-    
     private var onboardingData: [OnboardingData] = []
     private var onboardingController: [UIViewController] = []
     private var currentIndex: Int = 0  {
@@ -185,7 +186,7 @@ final public class OnboardingController: UIViewController {
                           options: currentIndex == self.onboardingData.count - 1 ? .transitionFlipFromLeft : .transitionFlipFromRight) { [weak self] in
             guard let self = self else { return }
             self.nextButton.setTitle(title, for: .normal)
-            self.nextButton.backgroundColor = self.currentIndex == self.onboardingData.count - 1 ? #colorLiteral(red: 0.9877198339, green: 0.3950536847, blue: 0.3682359457, alpha: 1) : #colorLiteral(red: 0.996609509, green: 0.6680213809, blue: 0.006788168568, alpha: 1)
+            self.nextButton.backgroundColor = self.currentIndex == self.onboardingData.count - 1 ? OnboardingController.configuration.palette.confirmation : OnboardingController.configuration.palette.action
         } completion: { _ in
         }
     }
