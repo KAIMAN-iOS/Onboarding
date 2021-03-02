@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnboardedController" customModule="Onboarding">
             <connections>
                 <outlet property="image" destination="gS7-gP-i22" id="Tor-1y-ho2"/>
-                <outlet property="messageLabel" destination="TmT-hw-aOj" id="0S6-mU-gd0"/>
-                <outlet property="titleLabel" destination="l7U-e7-ubB" id="gwl-Dc-Jei"/>
                 <outlet property="view" destination="iN0-l3-epB" id="AVT-uN-zNd"/>
             </connections>
         </placeholder>
@@ -25,39 +22,16 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gS7-gP-i22">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l7U-e7-ubB">
-                    <rect key="frame" x="20" y="116" width="125.5" height="41"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lorem ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TmT-hw-aOj">
-                    <rect key="frame" x="20" y="199" width="374" height="20.5"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="TmT-hw-aOj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="IPZ-yw-kuH"/>
-                <constraint firstItem="l7U-e7-ubB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="72" id="Kmv-Ej-tQa"/>
                 <constraint firstItem="gS7-gP-i22" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="NTm-yI-bqd"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="TmT-hw-aOj" secondAttribute="trailing" constant="20" id="Ndk-kn-hcp"/>
-                <constraint firstItem="l7U-e7-ubB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="Sz8-HI-8IP"/>
                 <constraint firstItem="gS7-gP-i22" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="WuY-UD-PZt"/>
                 <constraint firstItem="gS7-gP-i22" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eNW-xc-s3h"/>
                 <constraint firstAttribute="bottom" secondItem="gS7-gP-i22" secondAttribute="bottom" id="hFR-9P-sTk"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="TmT-hw-aOj" secondAttribute="bottom" id="kZk-ho-uEZ"/>
-                <constraint firstItem="TmT-hw-aOj" firstAttribute="top" secondItem="l7U-e7-ubB" secondAttribute="bottom" constant="42" id="usW-T2-542"/>
             </constraints>
             <point key="canvasLocation" x="-175.36231884057972" y="152.67857142857142"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

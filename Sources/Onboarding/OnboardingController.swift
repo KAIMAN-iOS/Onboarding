@@ -76,7 +76,7 @@ final public class OnboardingController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = OnboardingController.configuration.palette.mainTexts
-        pageContainer.backgroundColor = OnboardingController.configuration.palette.primary
+        pageContainer.backgroundColor = OnboardingController.configuration.palette.mainTexts
         
         pageContainer.addSubview(pageController.view)
         pageController.view.snp.makeConstraints { make in
