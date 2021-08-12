@@ -15,8 +15,8 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/jerometonnelier/KExtensions", .branch("master")),
-        .package(url: "https://github.com/jerometonnelier/ATAConfiguration", .branch("master")),
+        .package(url: "https://github.com/KAIMAN-iOS/KExtensions", .branch("master")),
+        .package(url: "https://github.com/KAIMAN-iOS/ATAConfiguration", .branch("master")),
         .package(url: "https://github.com/SnapKit/SnapKit", from: "5.0.0"),
     ],
     targets: [
